@@ -12,32 +12,31 @@ function imageMode(color) {
     image3.src = `img/undraw_mobile_encryption_${color}.svg`
 }
 
-function toggleDarkLightMode(isDark) {
-    nav.style.backgroundColor = isDark ? 'rgba(0, 0, 0, 0.5)' : 'rgba(255, 255, 255, 0.5)'
-    textBox.style.backgroundColor = isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)'
-    toggleIcon.children[0].textContent = isDark ? 'Dark Mode' : 'Light Mode'
-    if(isDark) {
-        toggleIcon.children[1].classList.replace('fa-sun', 'fa-moon')
-        imageMode('dark')
-    } else {
-        toggleIcon.children[1].classList.replace('fa-moon', 'fa-sun')
-        imageMode('light')
-    } 
+function changeDarkMode() {
+    nav.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
+    textBox.style.backgroundColor = 'rgba(255,255,255,0.5)'
+    toggleIcon.children[0].textContent = 'Dark Mode'
+    toggleIcon.children[1].classList.replace('fa-sun', 'fa-moon')
+    imageMode('dark')
+}
 
-        
-
-   
+function changeLightMode() {
+    nav.style.backgroundColor = 'rgba(255, 255, 255, 0.5)'
+    textBox.style.backgroundColor = 'rgba(0,0,0,0.5)'
+    toggleIcon.children[0].textContent = 'Light Mode'
+    toggleIcon.children[1].classList.replace('fa-moon', 'fa-sun')
+    imageMode('light')
 }
 
 function switchTheme(event) {
     if(event.target.checked) {
         document.documentElement.setAttribute('data-theme', 'dark')
         localStorage.setItem('theme', 'dark')
-        toggleDarkLightMode(true)
+        changeDarkMode()
     } else {
         document.documentElement.setAttribute('data-theme', 'light')
         localStorage.setItem('theme', 'light')
-        toggleDarkLightMode(false)
+        changeLightMode()
     }
 
 }
@@ -51,7 +50,6 @@ if(currentTheme) {
     document.documentElement.setAttribute('data-theme', currentTheme)
     if(currentTheme === 'dark') {
         toggleSwitch.checked = true
-        toggleDarkLightMode(true)
-
+        changeDarkMode()
     }
 }
